@@ -21,14 +21,16 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
+- task: CmdLine@1
+  inputs:
+    script: |
+      echo "> mvn tomcat7:run"
+      mvn tomcat7:run
+
 - task: CmdLine@2
   inputs:
     script: |
-      echo Write your commands here
+      echo "> WGET .."
       wget http://localhost:8080/greeting?name=AzureDevOpsDev1
-      echo Hello world
-      
-- task: SSH@0
-  inputs:
-    runOptions: 'commands'
-    commands: 'wget http://localhost:8080/greeting?name=AzureDevOpsDev1'
+      echo "> *** DONE ***"
+
