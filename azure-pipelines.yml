@@ -21,15 +21,9 @@ steps:
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
 
-- task: CmdLine@2
+- task: PublishTestResults@2
   inputs:
-    script: |
-      echo "> mvn tomcat7:run"
-      mvn tomcat7:run
-
-- task: CmdLine@2
-  inputs:
-    script: |
-      echo "> WGET .."
-      wget http://localhost:8080/greeting?name=AzureDevOpsDev1
-      echo "> *** DONE ***"
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/TEST-*.xml'
+    failTaskOnFailedTests: true
+    testRunTitle: 'AzurePipeline1'
